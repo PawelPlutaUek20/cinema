@@ -1,15 +1,11 @@
-import Seat from './Seat'
-import SeatInfo from './SeatInfo'
 import { useHistory } from 'react-router';
 import { Button, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { select, getReservation } from './cinemaSlice';
 
-import {
-  select,
-  getReservation,
-} from './cinemaSlice';
-
+import Seat from './Seat'
+import SeatInfo from './SeatInfo'
 import getRandomSeats from './getRandomSeats';
 import axios from 'axios';
 
@@ -64,14 +60,14 @@ export function Reservation() {
 
   return (
     <Container className={`d-flex flex-column vh-100 justify-content-center align-items-center`}>
-      <div style={{display: 'grid', gridTemplateColumns: `repeat(15, 50px)`, gap: '10px'}}>
+      <div style={{display: 'grid', gridTemplateColumns: `repeat(${15}, 50px)`, gap: '10px'}}>
         {cinema.map((rows, i) =>
           rows.map((seat, j) => 
             <Seat key={`s${i}${j}`} seat={seat}/>
           )
         )}
       </div>
-      <div className={'d-flex mt-5 justify-content-center align-items-center w-100'}>
+      <div className={'d-flex mt-5 align-items-center'} style={{minWidth: 890}}>
         <SeatInfo name="Miejsca Dostępne" type=""/>
         <SeatInfo name="Miejsca zarezerwowane" type="reserved" />
         <SeatInfo name="Twój wybór" type="selected" />
