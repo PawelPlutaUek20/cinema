@@ -1,6 +1,8 @@
 .space {
-  width: 50px;
-  height: 50px;
+  min-width: min(5vw, 5vh);
+  min-height: min(5vw, 5vh);
+  max-width: min(5vw, 5vh);
+  max-height: min(5vw, 5vh);
 }
 
 .seat{
@@ -25,5 +27,6 @@
 }
 
 .infoText{
-  margin: 10px;
+  margin: min(2vh, 2vw);
+  font-size: min(1.75vh, 1.75vw);
 }

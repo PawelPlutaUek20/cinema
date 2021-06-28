@@ -60,18 +60,20 @@ export function Reservation() {
 
   return (
     <Container className={`d-flex flex-column vh-100 justify-content-center align-items-center`}>
-      <div style={{display: 'grid', gridTemplateColumns: `repeat(${15}, 50px)`, gap: '10px'}}>
+      <div style={{display: 'grid', gridTemplateColumns: `repeat(${15}, min(5vh, 5vw))`, gap: 'min(1vh, 1vw)'}}>
         {cinema.map((rows, i) =>
           rows.map((seat, j) => 
             <Seat key={`s${i}${j}`} seat={seat}/>
           )
         )}
       </div>
-      <div className={'d-flex mt-5 align-items-center'} style={{minWidth: 890}}>
-        <SeatInfo name="Miejsca Dostępne" type=""/>
-        <SeatInfo name="Miejsca zarezerwowane" type="reserved" />
-        <SeatInfo name="Twój wybór" type="selected" />
-        <Button className="rounded-0 h-100" variant="outline-dark" onClick={() => reserve()} style = {{width: '230px', marginLeft: '78px'}}>Rezerwuj</Button>
+      <div className={'d-flex vw-100 mt-5 justify-content-center align-items-center'}>
+        <div className={'d-flex align-items-center'}>
+          <SeatInfo name="Miejsca Dostępne" type=""/>
+          <SeatInfo name="Miejsca zarezerwowane" type="reserved" />
+          <SeatInfo name="Twój wybór" type="selected" />
+        </div>
+        <Button className="rounded-0" variant="outline-dark" onClick={() => reserve()} style={{fontSize: 'min(1.75vw, 1.75vh)', minWidth: 'min(20vw, 20vh)', minHeight: 'min(5vw, 5vh)'}}>Rezerwuj</Button>
       </div>
     </Container>
   );
