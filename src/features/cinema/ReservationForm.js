@@ -33,6 +33,7 @@ export function ReservationForm() {
                             type="number" 
                             value={seatsNumber}
                             onChange={e => setSeatsNumber(parseInt(e.target.value))} 
+                            required
                         />
                     </Col>
                 </Form.Group>
