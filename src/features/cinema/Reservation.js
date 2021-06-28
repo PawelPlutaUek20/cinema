@@ -21,16 +21,15 @@ const fetchSeats = () => {
     })
 }
 
-const fillCinema = (apiSeats) => {
-  let cinema = Array.from(Array(10), () => new Array(15).fill(null))
+const fillCinema = (seats, x, y) => {
+  let cinemaArr = Array.from(Array(x), () => new Array(y).fill(null))
 
-  apiSeats.forEach(seat => {
-    cinema[seat.cords.x][seat.cords.y] = seat
+  seats.forEach(seat => {
+    cinemaArr[seat.cords.x][seat.cords.y] = seat
   })
 
-  return cinema
+  return cinemaArr
 }
-
 
 export function Reservation() {
 
@@ -40,11 +39,19 @@ export function Reservation() {
 
   const [seats, setSeats] = useState([])
   const [cinema, setCinema] = useState([])
-  
+  const [cinemaSize, setCinemaSize] = useState({x: 0, y: 0})
+
   useEffect(() => {
+
     fetchSeats().then((apiSeats) => {
+      const maxX = Math.max( ...apiSeats.map(e=> e.cords.x)) + 1;
+      const maxY = Math.max( ...apiSeats.map(e=> e.cords.y)) + 1;
+      setCinemaSize({
+        x: maxX,
+        y: maxY
+      })
       setSeats(apiSeats)
-      setCinema(fillCinema(apiSeats))
+      setCinema(fillCinema(apiSeats, maxX, maxY))
     })
   }, [])
 
@@ -60,7 +67,7 @@ export function Reservation() {
 
   return (
     <Container className={`d-flex flex-column vh-100 justify-content-center align-items-center`}>
-      <div style={{display: 'grid', gridTemplateColumns: `repeat(${15}, min(5vh, 5vw))`, gap: 'min(1vh, 1vw)'}}>
+      <div style={{display: 'grid', gridTemplateColumns: `repeat(${cinemaSize.y}, min(5vh, 5vw))`, gap:'min(1vh, 1vw)'}}>
         {cinema.map((rows, i) =>
           rows.map((seat, j) => 
             <Seat key={`s${i}${j}`} seat={seat}/>
